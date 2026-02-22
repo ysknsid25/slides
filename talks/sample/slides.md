@@ -4,7 +4,8 @@ title: サンプルスライド
 info: |
   サンプルスライドです。
 colorSchema: light
-# Firebase HostingのURL確定後に書き換える
+date: '2025-02-22'
+description: 'Slidevを使ったスライド管理のサンプルです。'
 ogImage: 'https://slides-afd16.web.app/sample/og-image.png'
 ---
 

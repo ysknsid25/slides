@@ -4,7 +4,7 @@
  * ビルド前に自動で以下を行う:
  * 1. .firebaserc からFirebase Hosting のベースURLを取得
  * 2. talks/*\/slides.md の ogImage を正しいURLに更新
- * 3. talks の一覧から dist/index.html を生成
+ * 3. talks の一覧から dist/index.html を生成（日付順ソート）
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'fs'
@@ -39,30 +39,53 @@ for (const name of talkNames) {
   if (content.includes('ogImage:')) {
     content = content.replace(/ogImage:.*/, `ogImage: '${ogImageUrl}'`)
   } else {
-    // frontmatter の最初の --- の直後に挿入
     content = content.replace(/^---\n/, `---\nogImage: '${ogImageUrl}'\n`)
   }
 
   writeFileSync(slidesMdPath, content)
   console.log(`  ✓ ogImage updated: talks/${name}/slides.md`)
 
-  // タイトルを frontmatter から抽出
+  // frontmatter からメタデータを抽出
   const titleMatch = content.match(/^title:\s*(.+)$/m)
   const title = titleMatch ? titleMatch[1].trim() : name
 
-  talksMeta.push({ name, title, url: `/${name}/` })
+  const dateMatch = content.match(/^date:\s*['"]?(.+?)['"]?$/m)
+  const date = dateMatch ? dateMatch[1].trim() : null
+
+  const descriptionMatch = content.match(/^description:\s*['"]?(.+?)['"]?$/m)
+  const description = descriptionMatch ? descriptionMatch[1].trim() : ''
+
+  talksMeta.push({ title, date, description, url: `./${name}/` })
 }
+
+// 日付の新しい順にソート（dateなしは末尾）
+talksMeta.sort((a, b) => {
+  if (!a.date && !b.date) return 0
+  if (!a.date) return 1
+  if (!b.date) return -1
+  return b.date.localeCompare(a.date)
+})
 
 // ── 3. dist/index.html を生成 ─────────────────────────────────────────────
 
 const distDir = join(ROOT, 'dist')
 mkdirSync(distDir, { recursive: true })
 
-const cards = talksMeta.map(({ name, title, url }) => `    <a class="slide-card" href="${url}">
+// YYYY-MM-DD → YYYY/MM/DD
+const formatDate = (dateStr) => {
+  if (!dateStr) return ''
+  return dateStr.replace(/-/g, '/')
+}
+
+const cards = talksMeta.map(({ title, date, description, url }) => `    <a class="slide-card" href="${url}">
       <div class="card-thumb">
         <img src="${url}og-image.png" alt="${title}" loading="lazy" onerror="this.style.display='none'" />
       </div>
-      <h2>${title}</h2>
+      <div class="card-body">
+        <h2>${title}</h2>
+        ${description ? `<p class="description">${description}</p>` : ''}
+        ${date ? `<time class="date" datetime="${date}">${formatDate(date)}</time>` : ''}
+      </div>
     </a>`).join('\n')
 
 const indexHtml = `<!DOCTYPE html>
@@ -111,12 +134,27 @@ const indexHtml = `<!DOCTYPE html>
       overflow: hidden;
     }
     .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .card-body {
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
     .slide-card h2 {
       font-size: 1rem;
       color: #F14E32;
-      padding: 0.75rem 1rem;
     }
-    .slide-card h2::before { content: '## '; color: #f47d65; }
+    .description {
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .date {
+      font-size: 0.8rem;
+      color: #9a9994;
+      text-align: right;
+      margin-top: auto;
+      padding-top: 0.25rem;
+    }
   </style>
 </head>
 <body>

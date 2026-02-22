@@ -4,8 +4,8 @@
  * 新しい talk を talks/ 以下に生成するスキャフォールドスクリプト
  *
  * Usage:
- *   pnpm new-talk <talk-name>
- *   pnpm new-talk 2024-01-my-presentation
+ *   pnpm new-talk <talk-name> [description]
+ *   pnpm new-talk 2024-01-my-presentation "発表のひとこと説明"
  */
 
 import { mkdirSync, writeFileSync, existsSync } from 'fs'
@@ -16,11 +16,12 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const ROOT = join(__dirname, '..')
 
 const name = process.argv[2]
+const description = process.argv[3] || ''
 
 if (!name) {
   console.error('Error: talk名を指定してください')
-  console.error('Usage: pnpm new-talk <talk-name>')
-  console.error('Example: pnpm new-talk 2024-01-my-presentation')
+  console.error('Usage: pnpm new-talk <talk-name> [description]')
+  console.error('Example: pnpm new-talk 2024-01-my-presentation "発表のひとこと説明"')
   process.exit(1)
 }
 
@@ -59,12 +60,14 @@ writeFileSync(join(talkDir, 'package.json'), JSON.stringify(packageJson, null, 2
 
 // ── slides.md (ogImage は prebuild 時に自動設定される) ────────────────────
 
+const today = new Date().toISOString().slice(0, 10)
+const descriptionLine = description ? `\ndescription: '${description}'` : ''
+
 const slidesMd = `---
 theme: '@ysknsid25/slidev-theme'
 title: ${name}
-info: |
-  プレゼンテーションの説明を書いてください。
 colorSchema: light
+date: '${today}'${descriptionLine}
 ---
 
 # タイトルを入力
