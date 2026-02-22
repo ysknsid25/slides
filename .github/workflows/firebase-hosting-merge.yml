@@ -33,7 +33,7 @@ jobs:
         run: pnpm --filter './talks/**' exec playwright install --with-deps chromium
 
       - name: Build all talks & generate OG images
-        run: pnpm build && pnpm export:og
+        run: pnpm build
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
           BASE_URL: https://slides.inorinrinrin.com
