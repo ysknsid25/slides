@@ -34,7 +34,7 @@ for (const name of talkNames) {
   const slidesMdPath = join(talksDir, name, 'slides.md')
   let content = readFileSync(slidesMdPath, 'utf-8')
 
-  const ogImageUrl = `${baseUrl}/${name}/og-image/1.png`
+  const ogImageUrl = `${baseUrl}/${name}.png`
 
   if (content.includes('ogImage:')) {
     content = content.replace(/ogImage:.*/, `ogImage: '${ogImageUrl}'`)
@@ -55,7 +55,7 @@ for (const name of talkNames) {
   const descriptionMatch = content.match(/^description:\s*['"]?(.+?)['"]?$/m)
   const description = descriptionMatch ? descriptionMatch[1].trim() : ''
 
-  talksMeta.push({ title, date, description, url: `/${name}/` })
+  talksMeta.push({ name, title, date, description, url: `/${name}/` })
 }
 
 // 日付の新しい順にソート（dateなしは末尾）
@@ -77,9 +77,9 @@ const formatDate = (dateStr) => {
   return dateStr.replace(/-/g, '/')
 }
 
-const cards = talksMeta.map(({ title, date, description, url }) => `    <a class="slide-card" href="${url}">
+const cards = talksMeta.map(({ name, title, date, description, url }) => `    <a class="slide-card" href="${url}">
       <div class="card-thumb">
-        <img src="${url}og-image/1.png" alt="${title}" loading="lazy" onerror="this.style.display='none'" />
+        <img src="/${name}.png" alt="${title}" loading="lazy" onerror="this.style.display='none'" />
       </div>
       <div class="card-body">
         <h2>${title}</h2>

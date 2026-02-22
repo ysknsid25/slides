@@ -4,7 +4,7 @@
 "scripts": {
     "new-talk": "node scripts/new-talk.mjs",
     "prebuild": "node scripts/prebuild.mjs",
-    "build": "node scripts/prebuild.mjs && pnpm --filter './talks/**' run export:og && pnpm --filter './talks/**' run build",
+    "build": "node scripts/prebuild.mjs && pnpm --filter './talks/**' run build && pnpm --filter './talks/**' run export:og",
     "export:og": "pnpm --filter './talks/**' run export:og",
     "dev": "pnpm --filter './talks/**' run dev"
   }

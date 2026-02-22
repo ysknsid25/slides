@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "slidev slides.md",
     "build": "slidev build slides.md --base /sample/ --out ../../dist/sample",
-    "export:og": "slidev export slides.md --format png --range 1 --output public/og-image"
+    "export:og": "slidev export slides.md --format png --range 1 --output .slidev/og-export && cp .slidev/og-export/1.png ../../dist/sample.png"
   },
   "dependencies": {
     "@slidev/cli": "^0.50.0",
