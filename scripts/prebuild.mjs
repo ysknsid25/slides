@@ -55,7 +55,7 @@ for (const name of talkNames) {
   const descriptionMatch = content.match(/^description:\s*['"]?(.+?)['"]?$/m)
   const description = descriptionMatch ? descriptionMatch[1].trim() : ''
 
-  talksMeta.push({ title, date, description, url: `./${name}/` })
+  talksMeta.push({ title, date, description, url: `/${name}/` })
 }
 
 // 日付の新しい順にソート（dateなしは末尾）
