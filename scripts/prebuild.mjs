@@ -34,7 +34,7 @@ for (const name of talkNames) {
   const slidesMdPath = join(talksDir, name, 'slides.md')
   let content = readFileSync(slidesMdPath, 'utf-8')
 
-  const ogImageUrl = `${baseUrl}/${name}/og-image.png`
+  const ogImageUrl = `${baseUrl}/${name}/og-image/1.png`
 
   if (content.includes('ogImage:')) {
     content = content.replace(/ogImage:.*/, `ogImage: '${ogImageUrl}'`)
