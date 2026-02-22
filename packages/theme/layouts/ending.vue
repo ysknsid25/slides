@@ -57,6 +57,7 @@ function resolveUrl(url) {
   background: $background;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   padding: 2.5rem 3rem;
   height: 100%;
   overflow: hidden;
@@ -64,20 +65,23 @@ function resolveUrl(url) {
   // ── 左側 ─────────────────────────────────────────────────────────────────
 
   .ending-left {
+    min-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
+    padding-left: 2rem;
     padding-right: 2rem;
   }
 
   .ending-title {
-    font-size: 3.6rem;
+    font-size: 3.2rem;
     font-weight: 700;
     color: $text-header;
     font-family: 'Roboto Slab', serif;
     line-height: 1.2;
     margin: 0;
+    white-space: nowrap;
 
     &::before { content: none; }
   }
@@ -87,6 +91,8 @@ function resolveUrl(url) {
     color: $text;
     line-height: 1.8;
     margin: 0;
+    margin-left: 1.5rem;
+    white-space: nowrap;
   }
 
   .ending-highlight {
@@ -121,6 +127,7 @@ function resolveUrl(url) {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    margin-left: 1.5rem;
   }
 
   .blog-url {
@@ -137,14 +144,17 @@ function resolveUrl(url) {
     width: 120px;
     height: 120px;
     flex-shrink: 0;
+    margin-left: auto;
   }
 
   // ── 右側: 立ち絵 ─────────────────────────────────────────────────────────
 
   .ending-right {
+    min-height: 0;
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    overflow: hidden;
   }
 
   .ending-char {

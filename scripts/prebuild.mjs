@@ -7,7 +7,7 @@
  * 3. talks の一覧から dist/index.html を生成（日付順ソート）
  */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync, copyFileSync } from 'fs'
 import { join } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -18,7 +18,7 @@ const ROOT = join(__dirname, '..')
 
 const projectId = process.env.FIREBASE_PROJECT_ID
 if (!projectId) throw new Error('FIREBASE_PROJECT_ID environment variable is not set')
-const baseUrl = `https://${projectId}.web.app`
+const baseUrl = process.env.BASE_URL ?? `https://${projectId}.web.app`
 
 // ── 2. talks/*/slides.md の ogImage を更新 ───────────────────────────────
 
@@ -94,6 +94,13 @@ const indexHtml = `<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Slides</title>
+  <link rel="icon" href="/icon.png" type="image/png" />
+  <meta property="og:title" content="Slides" />
+  <meta property="og:description" content="スライド一覧" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="${baseUrl}/" />
+  <meta property="og:image" content="${baseUrl}/icon.png" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -167,6 +174,22 @@ ${cards}
 `
 
 writeFileSync(join(distDir, 'index.html'), indexHtml)
+
+// icon.png をルートにコピー（favicon用）
+const iconDist = join(distDir, 'icon.png')
+let iconCopied = false
+for (const name of talkNames) {
+  const src = join(talksDir, name, 'public/icon.png')
+  if (existsSync(src)) {
+    copyFileSync(src, iconDist)
+    console.log(`  ✓ Copied icon.png to dist/ (from talks/${name}/public/)`)
+    iconCopied = true
+    break
+  }
+}
+if (!iconCopied) {
+  console.log(`  ⚠ icon.png not found in any talks/*/public/ — favicon will be missing`)
+}
 
 console.log(`  ✓ Generated dist/index.html (${talksMeta.length} talks)`)
 console.log(`  ✓ Base URL: ${baseUrl}`)
