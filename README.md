@@ -107,17 +107,29 @@ description: '発表の説明'    # 一覧ページのカードに表示
 
 ### `cover`（カバー）
 
-表紙スライド向け。コンテンツが中央揃えで表示されます。`#` の前置記号は非表示になります。
-frontmatter に `layout:` を指定しない場合のデフォルトです。
+表紙スライド向け。タイトルが左上に大きく表示され、左下にプロフィール、右下にハッシュタグが配置されます。
 
-```md
+```yaml
 ---
-layout: cover   # または省略
+layout: cover
+avatar: /icon.png              # public/ 以下のアイコン画像パス
+name: Kanon                    # 表示名
+github: ysknsid25              # GitHub ハンドル（省略可）
+twitter: ysknsid25             # X ハンドル（省略可）
+command: 'npx deno run ...'    # コマンド表示（省略可）
+hashtag: nankanohash           # ハッシュタグ（省略可、# は自動付与）
 ---
 
 # 発表タイトル
+```
 
-サブタイトル
+アイコン画像は各 talk の `public/icon.png` に置いてください。
+
+```
+talks/my-talk/
+├── public/
+│   └── icon.png    ← アイコン画像
+└── slides.md
 ```
 
 ### `default`（標準）

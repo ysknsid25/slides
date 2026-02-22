@@ -67,12 +67,18 @@ const slidesMd = `---
 theme: '@ysknsid25/slidev-theme'
 title: ${name}
 colorSchema: light
+transition: fade
 date: '${today}'${descriptionLine}
+layout: cover
+avatar: /icon.png
+name: Kanon
+github: ysknsid25
+twitter: ysknsid25
+command: 'npx deno run jsr:@ysknsid25/whois'
+hashtag: nankanohash
 ---
 
 # タイトルを入力
-
-サブタイトルを入力
 
 ---
 layout: default

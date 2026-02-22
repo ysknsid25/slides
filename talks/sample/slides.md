@@ -1,17 +1,22 @@
 ---
 theme: '@ysknsid25/slidev-theme'
 title: サンプルスライド
-info: |
-  サンプルスライドです。
 colorSchema: light
+transition: fade
 date: '2025-02-22'
 description: 'Slidevを使ったスライド管理のサンプルです。'
 ogImage: 'https://slides-afd16.web.app/sample/og-image.png'
+# カバースライド用プロフィール情報
+layout: cover
+avatar: /icon.png
+name: Kanon
+github: ysknsid25
+twitter: ysknsid25
+command: 'npx deno run jsr:@ysknsid25/whois'
+hashtag: nankanohash
 ---
 
-# サンプルスライド
-
-はじめてのSlidevプレゼンテーション
+# サンプルのタイトル
 
 ---
 layout: default
