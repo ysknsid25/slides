@@ -79,7 +79,7 @@ const formatDate = (dateStr) => {
 
 const cards = talksMeta.map(({ title, date, description, url }) => `    <a class="slide-card" href="${url}">
       <div class="card-thumb">
-        <img src="${url}og-image.png" alt="${title}" loading="lazy" onerror="this.style.display='none'" />
+        <img src="${url}og-image/1.png" alt="${title}" loading="lazy" onerror="this.style.display='none'" />
       </div>
       <div class="card-body">
         <h2>${title}</h2>
