@@ -1,9 +1,77 @@
+<script setup lang="ts">
+import { useNav } from '@slidev/client'
+import seedrandom from 'seedrandom'
+import { computed, ref, watch } from 'vue'
+
+const { currentSlideRoute } = useNav()
+
+type Range = [number, number]
+
+const seed = computed(() => `slide-${currentSlideRoute.value?.no ?? 0}`)
+
+const overflow = 0.3
+const disturb = 0.3
+const disturbChance = 0.3
+
+function usePoly(number: number) {
+  function getPoints(): Range[] {
+    const rng = seedrandom(`${seed.value}-${number}`)
+    function randomBetween([a, b]: Range) {
+      return rng() * (b - a) + a
+    }
+    function applyOverflow(v: number) {
+      const shifted = v * (1 + overflow * 2) - overflow
+      return rng() < disturbChance ? shifted + (rng() - 0.5) * disturb : shifted
+    }
+    return Array.from({ length: number }).fill(0).map(() => [
+      applyOverflow(randomBetween([-0.2, 1.2])),
+      applyOverflow(randomBetween([-0.2, 1.2])),
+    ] as Range)
+  }
+
+  function distance2([x1, y1]: Range, [x2, y2]: Range) {
+    return (x2 - x1) ** 2 + (y2 - y1) ** 2
+  }
+
+  const points = ref<Range[]>(getPoints())
+  const poly = computed(() =>
+    points.value.map(([x, y]) => `${x * 100}% ${y * 100}%`).join(', '),
+  )
+
+  function jumpPoints() {
+    const newPoints = new Set(getPoints())
+    points.value = points.value.map((o) => {
+      let minDist = Infinity
+      let closest: Range | undefined
+      for (const n of newPoints) {
+        const d = distance2(o, n)
+        if (d < minDist) { minDist = d; closest = n }
+      }
+      newPoints.delete(closest)
+      return closest!
+    })
+  }
+
+  watch(currentSlideRoute, () => jumpPoints())
+
+  return poly
+}
+
+const poly1 = usePoly(10)
+const poly2 = usePoly(6)
+const poly3 = usePoly(3)
+</script>
+
 <template>
   <div class="slidev-layout default">
-    <div class="glow-container">
-      <div class="glow-shape glow-1" />
-      <div class="glow-shape glow-2" />
-      <div class="glow-shape glow-3" />
+    <!-- グロー背景 -->
+    <div
+      class="glow-bg"
+      aria-hidden="true"
+    >
+      <div class="glow-clip glow-1" :style="{ clipPath: `polygon(${poly1})` }" />
+      <div class="glow-clip glow-2" :style="{ clipPath: `polygon(${poly2})` }" />
+      <div class="glow-clip glow-3" :style="{ clipPath: `polygon(${poly3})` }" />
     </div>
 
     <div class="layout-content" :class="`align-${$frontmatter.contentAlign || 'left'}`">
@@ -29,36 +97,36 @@
 
   // ── グラデーション glow ──────────────────────────────────────────────────
 
-  .glow-container {
+  .glow-bg {
     position: absolute;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
     filter: blur(70px);
     transform: translateZ(0);
+    z-index: 0;
   }
 
-  .glow-shape {
+  .glow-clip {
     position: absolute;
     inset: 0;
+    aspect-ratio: 16 / 9;
+    transition: all 2.5s ease;
   }
 
   .glow-1 {
-    background: linear-gradient(to right, rgba($text-header, 0.55), transparent);
-    clip-path: polygon(0% 5%, 70% 0%, 100% 60%, 20% 100%, 0% 70%);
-    opacity: 0.35;
+    background: linear-gradient(to right, #F14E32, transparent);
+    opacity: 0.15;
   }
 
   .glow-2 {
-    background: linear-gradient(to left, rgba($link, 0.50), transparent);
-    clip-path: polygon(30% 0%, 100% 20%, 70% 100%, 0% 75%);
-    opacity: 0.30;
+    background: linear-gradient(to left, #0388A6, transparent);
+    opacity: 0.25;
   }
 
   .glow-3 {
-    background: linear-gradient(to top, rgba($highlight, 0.60), transparent);
-    clip-path: polygon(50% 40%, 100% 0%, 100% 100%, 60% 100%);
-    opacity: 0.25;
+    background: linear-gradient(to top, #FFE566, transparent);
+    opacity: 0.20;
   }
 
   // ── コンテンツ ────────────────────────────────────────────────────────────
