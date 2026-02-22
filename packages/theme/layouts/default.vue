@@ -80,7 +80,7 @@ const poly3 = usePoly(3)
 
     <!-- プログレスバー（最終ページ以外に表示） -->
     <div v-if="$slidev.nav.currentPage < $slidev.nav.total" class="progress-bar">
-      <div class="progress-fill" :style="{ width: ($slidev.nav.currentPage / $slidev.nav.total * 100) + '%' }" />
+      <div class="progress-fill" :style="{ width: ($slidev.nav.currentPage / ($slidev.nav.total - 1) * 100) + '%' }" />
     </div>
   </div>
 </template>

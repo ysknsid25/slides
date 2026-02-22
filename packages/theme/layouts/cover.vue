@@ -10,9 +10,8 @@
     <div class="cover-footer">
       <div v-if="$frontmatter.name" class="profile">
         <img
-          v-if="$frontmatter.avatar"
           class="profile-avatar"
-          :src="resolveUrl($frontmatter.avatar)"
+          :src="avatorPng"
           alt="avatar"
         />
         <div class="profile-body">
@@ -44,6 +43,7 @@
 <script setup>
 import githubSvg from '../assets/github.svg?raw'
 import xSvg from '../assets/x.svg?raw'
+import avatorPng from '../assets/avator.png'
 
 const base = import.meta.env.BASE_URL
 function resolveUrl(url) {

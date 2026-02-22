@@ -104,3 +104,7 @@ layout: default
 - `Roboto Slab` フォント
 
 > このスライドは hatena-blog-theme-git のデザイントークンを使用しています。
+
+---
+layout: ending
+---
