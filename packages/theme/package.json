@@ -1,0 +1,15 @@
+{
+  "name": "@ysknsid25/slidev-theme",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "slidev-theme"
+  ],
+  "slidev": {
+    "colorSchema": "both"
+  },
+  "main": "./styles/index.scss",
+  "devDependencies": {
+    "sass-embedded": "^1.85.0"
+  }
+}

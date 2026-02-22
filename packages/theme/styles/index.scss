@@ -1,0 +1,87 @@
+// hatena-blog-theme-git のデザイントークンをインポート
+// パスはサブモジュールの相対パス（Slidevのビルド時に解決される）
+@import '../../../../vendor/hatena-blog-theme-git/scss/lib/variable';
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
+
+// Slidev CSS変数へのマッピング
+:root {
+  --slidev-theme-primary:    #{$text-header};
+  --slidev-theme-secondary:  #{$link};
+  --slidev-theme-background: #{$background};
+  --slidev-theme-surface:    #{$bg-content};
+  --slidev-theme-text:       #{$text};
+  --slidev-theme-text-light: #{$text-light};
+  --slidev-theme-border:     #{$border};
+  --slidev-theme-highlight:  #{$highlight};
+  --slidev-theme-code-bg:    #{$bg-light};
+
+  --slidev-font-family-base: #{$font-family-base};
+  --slidev-font-family-mono: #{$font-family-monospace};
+}
+
+// ダークモード
+.dark {
+  @import '../../../../vendor/hatena-blog-theme-git/scss/lib/variable-dark';
+
+  --slidev-theme-primary:    #{$text-header};
+  --slidev-theme-secondary:  #{$link};
+  --slidev-theme-background: #{$background};
+  --slidev-theme-surface:    #{$bg-content};
+  --slidev-theme-text:       #{$text};
+  --slidev-theme-text-light: #{$text-light};
+  --slidev-theme-border:     #{$border};
+  --slidev-theme-highlight:  #{$highlight};
+  --slidev-theme-code-bg:    #{$bg-light};
+}
+
+// ベーススタイル
+.slidev-layout {
+  font-family: var(--slidev-font-family-base);
+  background: var(--slidev-theme-background);
+  color: var(--slidev-theme-text);
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--slidev-theme-primary);
+    font-family: var(--slidev-font-family-base);
+    font-weight: 700;
+  }
+
+  h1::before { content: '# ';  color: lighten(#F14E32, 10%); }
+  h2::before { content: '## '; color: lighten(#F14E32, 10%); }
+
+  a {
+    color: var(--slidev-theme-secondary);
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+
+  code {
+    font-family: var(--slidev-font-family-mono);
+    background: var(--slidev-theme-code-bg);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+  }
+
+  pre {
+    background: var(--slidev-theme-code-bg);
+    border-radius: 6px;
+    padding: 1em;
+    code { background: transparent; padding: 0; }
+  }
+
+  blockquote {
+    border-left: 4px solid var(--slidev-theme-primary);
+    background: $bg-quote;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    color: var(--slidev-theme-text-light);
+  }
+
+  mark {
+    background: var(--slidev-theme-highlight);
+    color: var(--slidev-theme-text);
+    padding: 0.1em 0.2em;
+  }
+}
