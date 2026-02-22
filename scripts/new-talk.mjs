@@ -47,7 +47,7 @@ const packageJson = {
   scripts: {
     dev: 'slidev slides.md',
     build: `slidev build slides.md --base /${name}/ --out ../../dist/${name}`,
-    'export:og': `node ../../scripts/capture-og.mjs ${name}`,
+    'export:og': `slidev export slides.md --format png --range 1 --output .slidev/og-export && cp .slidev/og-export/1.png ../../dist/${name}.png`,
   },
   dependencies: {
     '@slidev/cli': '^0.50.0',
