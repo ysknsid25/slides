@@ -53,6 +53,7 @@ const packageJson = {
     '@slidev/cli': '^0.50.0',
     '@slidev/theme-default': 'latest',
     '@ysknsid25/slidev-theme': 'workspace:*',
+    'playwright-chromium': '^1.10.0',
   },
 }
 
@@ -69,6 +70,7 @@ title: ${name}
 colorSchema: light
 transition: fade
 date: '${today}'${descriptionLine}
+favicon: '/icon.png'
 layout: cover
 avatar: /icon.png
 name: Kanon

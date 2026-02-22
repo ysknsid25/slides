@@ -5,6 +5,7 @@ colorSchema: light
 transition: fade
 date: '2025-02-22'
 description: 'Slidevを使ったスライド管理のサンプルです。'
+favicon: '/icon.png'
 ogImage: 'https://slides-afd16.web.app/sample/og-image.png'
 # カバースライド用プロフィール情報
 layout: cover
