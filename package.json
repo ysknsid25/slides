@@ -1,7 +1,7 @@
 {
   "name": "slides",
   "private": true,
-  "scripts": {
+"scripts": {
     "new-talk": "node scripts/new-talk.mjs",
     "prebuild": "node scripts/prebuild.mjs",
     "build": "node scripts/prebuild.mjs && pnpm --filter './talks/**' run build",

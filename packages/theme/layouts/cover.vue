@@ -12,7 +12,7 @@
         <img
           v-if="$frontmatter.avatar"
           class="profile-avatar"
-          :src="$frontmatter.avatar"
+          :src="resolveUrl($frontmatter.avatar)"
           alt="avatar"
         />
         <div class="profile-body">
@@ -44,6 +44,12 @@
 <script setup>
 import githubSvg from '../assets/github.svg?raw'
 import xSvg from '../assets/x.svg?raw'
+
+const base = import.meta.env.BASE_URL
+function resolveUrl(url) {
+  if (!url || /^https?:\/\//.test(url)) return url
+  return base.replace(/\/$/, '') + (url.startsWith('/') ? url : '/' + url)
+}
 </script>
 
 <style lang="scss">

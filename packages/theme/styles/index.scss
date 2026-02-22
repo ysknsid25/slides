@@ -1,6 +1,6 @@
 // hatena-blog-theme-git のデザイントークンをインポート
 // パスはサブモジュールの相対パス（Slidevのビルド時に解決される）
-@import '../../../../vendor/hatena-blog-theme-git/scss/lib/variable';
+@import '../../../vendor/hatena-blog-theme-git/scss/lib/variable';
 
 // Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
@@ -23,7 +23,7 @@
 
 // ダークモード
 .dark {
-  @import '../../../../vendor/hatena-blog-theme-git/scss/lib/variable-dark';
+  @import '../../../vendor/hatena-blog-theme-git/scss/lib/variable-dark';
 
   --slidev-theme-primary:    #{$text-header};
   --slidev-theme-secondary:  #{$link};

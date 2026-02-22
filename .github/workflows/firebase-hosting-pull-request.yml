@@ -31,7 +31,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright (OG画像エクスポート用)
-        run: npx playwright-chromium install --with-deps chromium
+        run: pnpm --filter './talks/**' exec playwright install --with-deps chromium
 
       - name: Build all talks & generate OG images
         run: pnpm build && pnpm export:og

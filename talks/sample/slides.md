@@ -22,11 +22,26 @@ hashtag: nankanohash
 layout: default
 ---
 
-## 概要
+## 箇条書きリスト（ul）
 
 - **Slidev** によるスライド管理
 - `hatena-blog-theme-git` のデザインを継承
 - Firebase Hosting でホスティング
+- ネストのサンプル
+  - サブアイテム 1
+  - サブアイテム 2
+
+---
+layout: default
+---
+
+## 番号付きリスト（ol）
+
+1. リポジトリをクローン
+2. `pnpm install` で依存関係をインストール
+3. `pnpm new-talk <name>` で新規スライドを作成
+4. `slides.md` を編集してプレゼンを作成
+5. `master` にプッシュして Firebase へ自動デプロイ
 
 ---
 layout: default
@@ -41,6 +56,41 @@ const greet = (name: string): string => {
 
 console.log(greet('World'))
 ```
+
+---
+layout: default
+---
+
+## 右寄せのサンプル
+contentAlign: right
+
+---
+layout: default
+contentAlign: right
+---
+
+## 右寄せテキスト
+
+- 右寄せのリストアイテム
+- `contentAlign: right` で指定
+
+---
+layout: content
+---
+
+見出しなしの **content** レイアウトです。
+
+画像や本文を単体で表示するときに使います。
+
+---
+layout: content
+contentAlign: left
+---
+
+左寄せの content レイアウト。
+
+- リストも表示できます
+- `contentAlign: left` を指定
 
 ---
 layout: default
