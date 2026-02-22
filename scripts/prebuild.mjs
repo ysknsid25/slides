@@ -2,7 +2,7 @@
  * prebuild.mjs
  *
  * ビルド前に自動で以下を行う:
- * 1. .firebaserc からFirebase Hosting のベースURLを取得
+ * 1. 環境変数 FIREBASE_PROJECT_ID からFirebase Hosting のベースURLを取得
  * 2. talks/*\/slides.md の ogImage を正しいURLに更新
  * 3. talks の一覧から dist/index.html を生成（日付順ソート）
  */
@@ -16,8 +16,8 @@ const ROOT = join(__dirname, '..')
 
 // ── 1. Firebase Hosting ベースURLを取得 ───────────────────────────────────
 
-const firebaserc = JSON.parse(readFileSync(join(ROOT, '.firebaserc'), 'utf-8'))
-const projectId = firebaserc.projects.default
+const projectId = process.env.FIREBASE_PROJECT_ID
+if (!projectId) throw new Error('FIREBASE_PROJECT_ID environment variable is not set')
 const baseUrl = `https://${projectId}.web.app`
 
 // ── 2. talks/*/slides.md の ogImage を更新 ───────────────────────────────
