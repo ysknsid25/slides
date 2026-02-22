@@ -71,6 +71,8 @@ talksMeta.sort((a, b) => {
 const distDir = join(ROOT, 'dist')
 mkdirSync(distDir, { recursive: true })
 
+const glowBgJs = readFileSync(join(ROOT, 'vendor/hatena-blog-theme-git/js/glow-bg.js'), 'utf-8')
+
 // YYYY-MM-DD → YYYY/MM/DD
 const formatDate = (dateStr) => {
   if (!dateStr) return ''
@@ -114,7 +116,7 @@ const indexHtml = `<!DOCTYPE html>
       padding: 2rem;
     }
     header {
-      border-bottom: 2px solid #F14E32;
+      border-bottom: 2px solid #EFEEE6;
       padding-bottom: 1rem;
       margin-bottom: 2rem;
     }
@@ -169,6 +171,7 @@ const indexHtml = `<!DOCTYPE html>
   <main class="slides-grid">
 ${cards}
   </main>
+  <script>${glowBgJs}</script>
 </body>
 </html>
 `
