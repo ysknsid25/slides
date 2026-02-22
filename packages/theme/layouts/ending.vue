@@ -18,9 +18,9 @@ function resolveUrl(url) {
       <h1 class="ending-title">Happy Hacking!!</h1>
 
       <p class="ending-message">
-        今日みたいな話を毎週末はてなブログに書いています。<br><br>
+        JavaScript/TypeScript/AIに関する話を毎週末はてなブログに書いています。<br><br>
         <span class="ending-highlight">読者数300人を目指しているので、</span><br>
-        <span class="ending-highlight">ぜひ読者登録よろしくお願い致します！</span>
+        <span class="ending-highlight">ぜひ読者登録・はてなブックマークよろしくお願い致します！</span>
       </p>
 
       <div class="ending-links">
