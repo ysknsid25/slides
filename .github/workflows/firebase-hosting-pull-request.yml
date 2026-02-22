@@ -35,6 +35,8 @@ jobs:
 
       - name: Build all talks & generate OG images
         run: pnpm build && pnpm export:og
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
