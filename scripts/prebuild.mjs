@@ -116,7 +116,7 @@ const indexHtml = `<!DOCTYPE html>
       padding: 2rem;
     }
     header {
-      border-bottom: 2px solid #EFEEE6;
+      border-bottom: 2px solid #9a9994;
       padding-bottom: 1rem;
       margin-bottom: 2rem;
     }
