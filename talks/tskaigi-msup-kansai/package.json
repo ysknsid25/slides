@@ -1,0 +1,15 @@
+{
+  "name": "@slides/tskaigi-msup-kansai",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md --base /tskaigi-msup-kansai/ --out ../../dist/tskaigi-msup-kansai",
+    "export:og": "slidev export slides.md --format png --range 1 --output .slidev/og-export && cp .slidev/og-export/1.png ../../dist/tskaigi-msup-kansai.png"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "latest",
+    "@ysknsid25/slidev-theme": "workspace:*",
+    "playwright-chromium": "^1.10.0"
+  }
+}

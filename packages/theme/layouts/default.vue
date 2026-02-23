@@ -205,11 +205,33 @@ const poly3 = usePoly(3)
     code { background: transparent; padding: 0; }
   }
 
+  u {
+    text-decoration: none;
+    background: linear-gradient(
+      transparent calc(100% - 0.5rem),
+      rgba($highlight, 0.8) calc(100% - 0.5rem)
+    );
+  }
+
   blockquote {
     border-left: 4px solid $text-header;
     background: $bg-quote;
     padding: 0.5em 1em;
     color: $text-light;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+      border: 1px solid $text-description;
+      padding: 0.35em 0.75em;
+    }
+
+    th {
+      font-weight: 700;
+    }
   }
 
   // ── 配置（frontmatter: contentAlign: left | center | right）─────────────
