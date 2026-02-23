@@ -4,7 +4,7 @@ title: Devin Review もう使った？
 colorSchema: light
 transition: fade
 date: '2026-02-23'
-description: 'Devin Review もう使った？'
+description: '『Devin Meetup Osaka #1』の登壇資料です。'
 favicon: '/icon.png'
 layout: cover
 avatar: /icon.png

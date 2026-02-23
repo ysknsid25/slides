@@ -5,7 +5,7 @@ title: 生成AIでTSを扱うときに設定しておきたい ESLint (plugin) �
 colorSchema: light
 transition: fade
 date: '2026-02-23'
-description: '生成AIでTSを扱うときに設定しておきたいESLint(plugin)ルール'
+description: '『TSKaigi Mashup Kansai 生成AIでTSを扱うときに考えたい設計&ガードレール』の登壇資料です。'
 favicon: '/icon.png'
 layout: cover
 avatar: /icon.png
