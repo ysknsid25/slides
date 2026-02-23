@@ -11,7 +11,12 @@ function resolveUrl(url) {
 
 <template>
   <div class="slidev-layout ending">
-    <!-- グロー背景（default.vue と同じ仕組みは不要、シンプルな背景） -->
+    <!-- グロー背景 -->
+    <div class="glow-bg" aria-hidden="true">
+      <div class="glow-1" />
+      <div class="glow-2" />
+      <div class="glow-3" />
+    </div>
 
     <!-- 左側コンテンツ -->
     <div class="ending-left">
@@ -55,6 +60,7 @@ function resolveUrl(url) {
 @import '../../../vendor/hatena-blog-theme-git/scss/lib/variable';
 
 .slidev-layout.ending {
+  position: relative;
   background: $background;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -63,9 +69,46 @@ function resolveUrl(url) {
   height: 100%;
   overflow: hidden;
 
+  // ── グロー背景 ────────────────────────────────────────────────────────────
+
+  .glow-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    filter: blur(70px);
+    z-index: 0;
+  }
+
+  .glow-1 {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(#F14E32, 1) 0%, transparent 55%);
+    opacity: 0.15;
+  }
+
+  .glow-2 {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(315deg, rgba(#0388A6, 1) 0%, transparent 55%);
+    opacity: 0.25;
+  }
+
+  .glow-3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(#FFE566, 1) 0%, transparent 100%);
+    opacity: 0.20;
+  }
+
   // ── 左側 ─────────────────────────────────────────────────────────────────
 
   .ending-left {
+    position: relative;
+    z-index: 1;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -151,6 +194,8 @@ function resolveUrl(url) {
   // ── 右側: 立ち絵 ─────────────────────────────────────────────────────────
 
   .ending-right {
+    position: relative;
+    z-index: 1;
     min-height: 0;
     display: flex;
     align-items: flex-end;

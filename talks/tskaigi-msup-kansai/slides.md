@@ -93,7 +93,7 @@ layout: default
 layout: default
 ---
 
-## eslint-plugin-security — なぜ開発中に検知すべきか
+## eslint-plugin-security - なぜ開発中に検知すべきか
 
 <div class="mt-8 mb-16">
 ```mermaid
@@ -159,7 +159,7 @@ layout: default
 layout: default
 ---
 
-## @typescript-eslint/naming-convention — 設定例
+## @typescript-eslint/naming-convention(設定例)
 
 ```typescript
 '@typescript-eslint/naming-convention': [
