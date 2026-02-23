@@ -432,5 +432,26 @@ AIであれ人間であれ、開発者が守るべきガードレールとして
 | `@vitest/eslint-plugin` | テストコードの品質向上 |
 
 ---
+layout: default
+---
+
+## おわりに
+
+面白いことに、AIが進化してくれたおかげで**自分が欲しいESLintのルールをAIに作らせること**も以前より簡単になりました。<br/><br/>
+
+自分はHonoやUnJSのESLint Pluginを自作しています（よかったら ⭐️Star⭐️ をください...！！）。
+
+<div class="mt-8"></div>
+
+- <u>eslint-plugin-hono</u>
+  -  https://github.com/ysknsid25/eslint-plugin-hono
+- <u>eslint-plugin-citty</u>
+  -  https://github.com/ysknsid25/eslint-plugin-citty
+
+<div class="mt-8"></div>
+
+<u>自チームの状況に合わせて、みなさんもぜひESLint Pluginを自作してみてはいかがでしょうか？</u>
+
+---
 layout: ending
 ---
