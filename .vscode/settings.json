@@ -1,0 +1,7 @@
+{
+  "slidev.include": [
+    "**/slides.md",
+    "talks/devin-review/slides.md",
+    "talks/sample/slides.md"
+  ]
+}

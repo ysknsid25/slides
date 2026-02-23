@@ -1,0 +1,15 @@
+{
+  "name": "@slides/devin-review",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md --base /devin-review/ --out ../../dist/devin-review",
+    "export:og": "slidev export slides.md --format png --range 1 --output .slidev/og-export && cp .slidev/og-export/1.png ../../dist/devin-review.png"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "latest",
+    "@ysknsid25/slidev-theme": "workspace:*",
+    "playwright-chromium": "^1.10.0"
+  }
+}

@@ -23,6 +23,7 @@ slides/
 │
 ├── scripts/
 │   ├── prebuild.mjs                    # ビルド前処理（ogImage 更新・一覧ページ生成）
+│   ├── gen-index.mjs                   # ビルド済みスライドから index.html だけ再生成
 │   └── new-talk.mjs                    # 新規スライド作成スクリプト
 │
 ├── talks/                              # スライド置き場
@@ -149,6 +150,8 @@ layout: default
 
 ## デプロイ
 
+### 全スライドをまとめてデプロイ
+
 `master` ブランチに push すると GitHub Actions が自動で以下を実行します。
 
 1. `pnpm build` — 全スライドをビルド（事前に ogImage URL・一覧ページを自動生成）
@@ -161,6 +164,64 @@ layout: default
 https://slides-afd16.web.app/           # スライド一覧
 https://slides-afd16.web.app/sample/    # 各スライド
 ```
+
+### 差分更新（スライドが増えてきたら）
+
+スライドが増えると全体ビルドに時間がかかります。追加・更新したスライドだけをビルドして、トップページだけ再生成する差分更新が使えます。
+
+#### 手順
+
+**1. 対象スライドだけビルドする**
+
+```bash
+pnpm --filter @slides/<talk-name> build
+pnpm --filter @slides/<talk-name> export:og
+```
+
+例:
+```bash
+pnpm --filter @slides/my-new-talk build
+pnpm --filter @slides/my-new-talk export:og
+```
+
+**2. トップページ（index.html）を再生成する**
+
+```bash
+pnpm gen-index
+```
+
+`dist/` に存在するビルド済みスライドを走査して `dist/index.html` を再生成します。他のスライドは再ビルドしません。
+
+**3. デプロイする**
+
+```bash
+firebase deploy
+```
+
+手順 2・3 はまとめて実行できます:
+
+```bash
+pnpm deploy:incremental
+```
+
+#### コマンドまとめ
+
+| コマンド | 内容 |
+|---|---|
+| `pnpm build` | 全スライドをビルド＋index.html 生成 |
+| `pnpm --filter @slides/<name> build` | 指定スライドのみビルド |
+| `pnpm --filter @slides/<name> export:og` | 指定スライドの OGP 画像のみ生成 |
+| `pnpm gen-index` | ビルド済みスライドから index.html だけ再生成 |
+| `pnpm deploy:incremental` | gen-index → firebase deploy |
+
+#### ベースURL の決定ロジック
+
+`gen-index` は以下の優先順でベースURLを決定します。
+
+1. 環境変数 `FIREBASE_PROJECT_ID` → `https://${projectId}.web.app`
+2. 環境変数 `BASE_URL`
+3. `talks/*/slides.md` の `ogImage` フィールドから自動抽出
+4. すべて未設定 → 相対パスで生成
 
 ## デザインについて
 
